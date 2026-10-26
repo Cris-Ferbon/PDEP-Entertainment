@@ -11,24 +11,17 @@ object productora{
 
     method totalEntradasVendidas() = asistentes.sum({asistente => asistente.cantidadEntradasCompradas()}) 
 
-    method cantidadEntradaVendidaPorBanda(nombreBanda) = asistentes.sum({asistente => asistente.cantidadDeEntradasCompradasPorBanda(nombreBanda)})
+    method cantidadEntradasVendidasPorBanda(nombreBanda) = asistentes.sum({asistente => asistente.cantidadDeEntradasCompradasPorBanda(nombreBanda)})
 
-    method bandaMasPopular(){
-        var cantidadMaximaVendida = 0 
-        var bandaConMasVentas
-        bandas.forEach({
-            banda =>
-                if (cantidadMaximaVendida <= self.cantidadEntradaVendidaPorBanda(banda.nombre())){
-                    cantidadMaximaVendida = self.cantidadEntradaVendidaPorBanda(banda.nombre())
-                    bandaConMasVentas = banda
-                }
-        })
-        return bandaConMasVentas
-    }
+    method bandaMasPopular() = bandas.max({ banda => self.cantidadEntradasVendidasPorBanda(banda) })
+
 
     method bonificarAsistenteVIP(){
         asistentes.forEach({
-            asistente => asistente.tipoAbono().bonificar()
+            asistente => asistente.bonificar()
         })
     }
+
+    method agregarAsistente(asistente) = asistentes.add(asistente)
+    method agregarBanda(banda) = bandas.add(banda)
 }

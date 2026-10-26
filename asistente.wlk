@@ -1,7 +1,6 @@
 import dineroInsuficienteExec.DineroInsuficienteException
 class Asistente{
 
-    const bandaAsistida
     var historialEntradas = []
     var dineroDisponible
     var tipoAbono
@@ -29,14 +28,14 @@ class Asistente{
 
     method mostarNombreBandasDeEntradas()= self.nombresDeBandasCompradas().asSet()
 
-    method totalGastado() = historialEntradas.sum({entrada => entrada})
+    method totalGastado() = historialEntradas.sum({entrada => entrada.precioFinal()})
 
     method cantidadEntradasCompradas() = historialEntradas.size()
 
-    method nombresDeBandasCompradas() = historialEntradas.flatMap({entrada => entrada.nombreBanda()})
+    method nombresDeBandasCompradas() = historialEntradas.map({entrada => entrada.nombreBanda()})
 
-    method cantidadDeEntradasCompradasPorBanda(nombreBanda) = self.nombresDeBandasCompradas().filter({nombre => nombre == nombreBanda }).size()
+    method cantidadDeEntradasCompradasPorBanda(unaBanda) = historialEntradas.filter({entrada => entrada.banda() == unaBanda }).size()
 
-    method tipoAbono() = tipoAbono
+    method bonificar() = tipoAbono.bonificar()
 
 }

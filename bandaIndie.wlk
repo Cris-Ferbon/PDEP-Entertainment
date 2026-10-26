@@ -1,5 +1,5 @@
-import Banda.Banda
-class BandaTrap inherits Banda(){
+import banda.Banda
+class BandaIndie inherits Banda{
 
     var cantidadInstrumentos 
 

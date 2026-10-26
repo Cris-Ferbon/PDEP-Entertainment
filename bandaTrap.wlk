@@ -1,7 +1,9 @@
-import Banda.Banda
-class BandaTrap inherits Banda(){
+import banda.Banda
+class BandaTrap inherits Banda{
 
     var tieneHielo
+    
+    override method canon() = 1000000 * self.popularidad()
     override method gastoExtra() = 0 
     override method popularidad() {
         if (tieneHielo){
@@ -9,7 +11,4 @@ class BandaTrap inherits Banda(){
         }else {return 0}
     } 
 
-    override  method presupueto(){
-        return super() * self.popularidad() 
-    } 
 }
