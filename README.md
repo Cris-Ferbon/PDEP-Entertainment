@@ -1,31 +1,39 @@
 
+# Conceptos Vistos en la Materia
 
-## example
+A continuación se detallan los conceptos principales de Diseño Orientado a Objetos que fueron aplicados en la resolución de este proyecto.
 
-TODO
+---
 
-Conceptos vistos en la materia :
+## Polimorfismo
 
-Polimorfismo : 
+Se utiliza en la jerarquía de **Abonos** para la vista del `Asistente`, más específicamente en los métodos:
+* `calcularPrecio()`
+* `bonificar()`
 
-Se utiliza en la parte de Abonos para la vista del Asistente mas especificamente en los metodos : calcularPrecio() y bonificar()
+Tanto el objeto `AbonoFan` como cualquier instancia de `AbonoVIP` entienden estos dos mensajes, actuando de manera diferente y transparente para quien los invoca.
 
-Tanto como el objeto AbonoFan como cualquier instancia de AbonoVIP, entienden estos dos mensajes actuando de manera diferente.
+## Composición
 
-Composición : 
+Se aplica en la clase `Asistente` respecto a su tipo de **Abono**. En vez de tener una clase distinta por cada tipo de abono de asistente, se delega esta responsabilidad a un atributo interno. Esto permite cambiar de tipo de abono en tiempo de ejecución, de forma dinámica y sin necesidad de reinstanciar al asistente.
 
-Se utiliza en la parte de Asistente, con su tipo de Abono. En vez de tener una clase por cada tipo de abono de asistente. Se tiene un atributo en la clase asistente que va a permitir cambiar de tipo de abono en tiempo de ejecución sin necesidad de reinstanciar la clase.
+## Herencia
 
-Herencia :
+Se emplea en la clase `Banda`. Esta superclase simplifica los atributos y comportamientos comunes de las bandas en general, centralizando el código repetido y declarando algunos métodos abstractos que obligan a las subclases a definir su propio comportamiento.
 
-Se utiliza en la clase Banda simplifica los atributos y comportamientos comunes de las bandas en general y declara algunos métodos abstarctos que obligan a las subclases a definirlos.
+## Encapsulamiento
 
-Encapsulamiento :
+Se evidencia fuertemente en el manejo del historial de entradas del `Asistente`. El objeto expone consultas de negocio específicas, como el método `cantidadEntradasCompradas()`, en vez de devolver la lista directa de entradas para que terceros la manipulen libremente rompiendo el encapsulamiento.
 
-Se utiliza en el historial de entradas del asistente. El asistente expone consultas de como cantidadEntradasCompradas() en vez de devolver la lista para que los terceros la manipulen.
+## Asignación de Responsabilidades
 
-Responsabilidad :
+Se refleja en la correcta separación de responsabilidades dentro del modelo, logrando clases cohesivas. Por ejemplo:
 
-Se utiliza en la correcta separacion de responnsabilidades, Por ejemplo:
-	Entrada : Sabe su fecha, conoce a que banda corresponde y calcula su propio precio con impuestos
-	Asistente : Gestiona su billetera, registra compras y responde sobre sus gastos
+* **Entrada**: Sabe su fecha, conoce a qué banda corresponde y es la única responsable de calcular su propio precio incluyendo impuestos.
+* **Asistente**: Gestiona su billetera, registra las compras realizadas y es capaz de responder sobre sus propios gastos.
+
+---
+
+## Diagrama de Clases
+
+![Diagrama de Clases del Proyecto](./diagrama_solucion_Cristian_Fernandez.png)
