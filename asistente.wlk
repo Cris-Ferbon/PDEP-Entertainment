@@ -6,33 +6,27 @@ class Asistente{
     var tipoAbono
 
     method comprarEntrada(entrada){
-        try{
-            self.comprar(entrada.precioFinal())
-            historialEntradas.add(entrada)
-            }
-            catch errorCompra : DineroInsuficienteException{
-                console.println(errorCompra.message()) 
-            }
-
+        self.comprar(entrada.precioFinal())
+        historialEntradas.add(entrada)
     }
 
     method comprar(precio){
-        if((dineroDisponible - tipoAbono.calcularPrecio(precio)) < 0){
+        if(!self.puedePagar(precio)){
             throw new DineroInsuficienteException()
-        }else{
-            dineroDisponible -= tipoAbono.calcularPrecio(precio)
         }
+
+        dineroDisponible -= tipoAbono.calcularPrecio(precio)
     }
 
-    method mostrarEntradasDelAnioAnterior()= historialEntradas.filter({ entrada => entrada.fechaAnioPasado()  }) 
+    method puedePagar(precio) = dineroDisponible >= tipoAbono.calcularPrecio(precio)
 
-    method mostarNombreBandasDeEntradas()= self.nombresDeBandasCompradas().asSet()
+    method mostrarEntradasDelAnioAnterior()= historialEntradas.filter({ entrada => entrada.fechaAnioPasado()  })
 
     method totalGastado() = historialEntradas.sum({entrada => entrada.precioFinal()})
 
     method cantidadEntradasCompradas() = historialEntradas.size()
 
-    method nombresDeBandasCompradas() = historialEntradas.map({entrada => entrada.nombreBanda()})
+    method nombresDeBandasCompradas() = historialEntradas.map({entrada => entrada.nombreBanda()}).asSet()
 
     method cantidadDeEntradasCompradasPorBanda(unaBanda) = historialEntradas.filter({entrada => entrada.banda() == unaBanda }).size()
 
